@@ -43,6 +43,8 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
+        if (player_x - player_speed) <= 40:
+            player_x =
         player_x -= player_speed
     if keys[pygame.K_RIGHT]:
         player_x += player_speed
