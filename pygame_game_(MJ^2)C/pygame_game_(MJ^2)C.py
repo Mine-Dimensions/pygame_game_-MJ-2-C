@@ -20,6 +20,11 @@ player_atk_spd = 0.75
 
 player_x, player_y = 500, 500
 player_size = 40
+
+# [Size] [HP, Damage, Speed, ATK Speed]
+chaser = [[35], [40, 5, 2.5, 1]]
+shooter = [[35], [30, 6, 1, 1]]
+
 enemies = [
     pygame.Rect(random.randrange(50, 950), random.randrange(50, 950), 35, 35),
     pygame.Rect(random.randrange(50, 950), random.randrange(50, 950), 35, 35),
