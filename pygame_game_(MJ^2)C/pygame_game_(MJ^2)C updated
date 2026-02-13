@@ -282,8 +282,8 @@ while running:
                         Bullet(
                             enemy.centerx,
                             enemy.centery,
-                            player_x + player_size//2,
-                            player_y + player_size//2
+                            player_x + player_size//2 + random.randrange(-10, 10),
+                            player_y + player_size//2 + random.randrange(-10, 10)
                         )
                     )
 
@@ -291,7 +291,31 @@ while running:
 
                     enemy.x += random.randint(-40, 40)
                     enemy.y += random.randint(-40, 40)
-
+    count = 0
+    if wave % 5 == 0 and wave % 10 != 0:
+        for power in powerups:
+            if count == 0:
+                pygame.draw.rect(screen, (0, 255, 0), power)
+            if count == 1:
+                pygame.draw.rect(screen, (255, 0, 0), power)
+            if count == 2:
+                pygame.draw.rect(screen, (0, 0, 255), power)
+            if count == 3:
+                pygame.draw.rect(screen, (255, 255, 0), power)
+            if player_rect.colliderect(power):
+                if count == 0:
+                    player_health += 25
+                    powerups = []
+                if count == 1:
+                    player_damage += 10
+                    powerups = []
+                if count == 2:
+                    player_speed += 1
+                    powerups = []
+                if count == 3:
+                    player_atk_spd -= 75
+                    powerups = []
+            count += 1
     pygame.draw.rect(screen, (255, 110, 0), (player_x, player_y, player_size, player_size))
     wave_text = font.render(f"Wave - {wave}", True, (255, 255, 255))
     screen.blit(wave_text, (10, 10))
