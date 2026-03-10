@@ -6,3 +6,6 @@ Game Recision Doc: [https://obps-my.sharepoint.com/:w:/r/personal/mgrippe654_obp
 
 Patch File
 https://drive.google.com/file/d/1v3H5gTqbyNyXvibcXkUSCRzRvSefwk3G/view?usp=sharing
+
+Pygame Enemy AI Guide
+https://pygame-ai.readthedocs.io/en/latest/guide.html
