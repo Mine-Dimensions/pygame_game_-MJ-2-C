@@ -73,6 +73,7 @@ if __name__ == "__main__":
 
     wave = 1
     kills = 0
+    debug = False
     font = pygame.font.SysFont("Papyrus", 40)
 
     # PATCH - Catch Missing Sprites Error
@@ -242,6 +243,13 @@ if __name__ == "__main__":
             if keys[pygame.K_MINUS]:
                 player_health = 1
 
+            # Debug mode
+            if keys[pygame.K_F3]:
+                if debug == False:
+                    debug = True
+                elif debug == True:
+                    debug = False
+
             if wave == 31:
                 if keys[pygame.K_r]:
                     wave -= 1
@@ -304,7 +312,10 @@ if __name__ == "__main__":
                 bullet_rect = pygame.Rect(bullet.x - 5, bullet.y - 5, 10, 10)
 
             # Remove bullet if off screen
-            if bullet.x < 0 or bullet.x > WIDTH or bullet.y < 0 or bullet.y > HEIGHT:
+            # OPTION C - Day 4 - Region Check
+            if isinstance(bullet, BossBullet) and (bullet.x < -100 or bullet.x > WIDTH + 100 or bullet.y < -100 or bullet.y > HEIGHT + 100):
+                enemy_bullets.remove(bullet)
+            elif bullet.x < 0 or bullet.x > WIDTH or bullet.y < 0 or bullet.y > HEIGHT:
                 enemy_bullets.remove(bullet)
 
             if isinstance(bullet, BossBullet) and bullet_rect.colliderect(player_rect):
@@ -557,6 +568,11 @@ if __name__ == "__main__":
             count_text = font.render(f"Draw!", True, (255, 255, 255))
             screen.blit(count_text, (250, 350))
             font = pygame.font.SysFont("Papyrus", 40)
+
+        entities = 1 + len(enemies) + len(bullets) + len(enemy_bullets)
+        if debug == True:
+            debug_text = font.render(f"Entities - {entities}", True, (255, 255, 255))
+            screen.blit(debug_text, (10, 920))
 
         if wave == 31:
             ask_text = font.render(f"End Run - (R)", True, (255, 255, 255))
